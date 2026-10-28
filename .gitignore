@@ -1,0 +1,16 @@
+/build/
+/dist/
+/generated/
+/.deps/
+/.venv/
+__pycache__/
+*.pyc
+*.dll
+*.exe
+*.obj
+*.pdb
+*.lib
+*.exp
+*.zip
+/.vs/
+/.idea/

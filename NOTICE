@@ -1,0 +1,10 @@
+Warudo RhyLive Calibrate for OBS
+Copyright (C) 2026 Warudo Calibrate contributors
+
+This project's source code is available under GPL-2.0-or-later.
+The full GNU General Public License version 2 is included in LICENSE.
+
+The distributed plugin dynamically uses Qt libraries supplied by OBS Studio.
+Qt runtime binaries are not included in this distribution.
+OBS and Warudo are trademarks of their respective owners.
+This project is not endorsed by OBS Project or the Warudo developers.

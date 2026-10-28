@@ -1,0 +1,57 @@
+name: Build Windows
+
+on:
+  push:
+  pull_request:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  build:
+    runs-on: windows-2022
+    steps:
+      - uses: actions/checkout@v7
+      - name: Download OBS Qt SDK
+        shell: pwsh
+        run: |
+          $ErrorActionPreference = 'Stop'
+          $ProgressPreference = 'SilentlyContinue'
+          New-Item -ItemType Directory -Force -Path .deps | Out-Null
+          $url = 'https://github.com/obsproject/obs-deps/releases/download/2026-08-26/windows-deps-qt6-2026-08-26-x64-RelWithDebInfo.zip'
+          Invoke-WebRequest -Uri $url -OutFile .deps/qt6.zip
+          $expected = '590b8122154e5fda214a4b7efd0ea50c69036ddcf6511f0a4ac11ae851de1a23'
+          if ((Get-FileHash .deps/qt6.zip -Algorithm SHA256).Hash.ToLowerInvariant() -ne $expected) {
+              throw 'Qt SDK checksum mismatch'
+          }
+          Expand-Archive -LiteralPath .deps/qt6.zip -DestinationPath .deps/qt6
+      - name: Configure
+        shell: pwsh
+        run: |
+          cmake -S . -B build -G 'Visual Studio 17 2022' -A x64 "-DCMAKE_PREFIX_PATH=$pwd/.deps/qt6"
+          if ($LASTEXITCODE -ne 0) { throw 'Configuration failed' }
+      - name: Build
+        shell: pwsh
+        run: |
+          cmake --build build --config Release --parallel
+          if ($LASTEXITCODE -ne 0) { throw 'Build failed' }
+      - name: Test
+        shell: pwsh
+        run: |
+          $env:PATH = "$pwd/.deps/qt6/bin;" + $env:PATH
+          $env:QT_QPA_PLATFORM = 'minimal'
+          ctest --test-dir build -C Release --output-on-failure
+          if ($LASTEXITCODE -ne 0) { throw 'Tests failed' }
+      - name: Prepare release files
+        shell: pwsh
+        run: |
+          cmake --install build --config Release --prefix release
+          if ($LASTEXITCODE -ne 0) { throw 'Staging failed' }
+          Copy-Item README.md,README.ko.md,LICENSE,NOTICE,CHANGELOG.md -Destination release
+          Copy-Item docs -Destination release -Recurse
+      - uses: actions/upload-artifact@v7
+        with:
+          name: warudo-calibrate-windows-x64
+          path: release/
+          if-no-files-found: error
