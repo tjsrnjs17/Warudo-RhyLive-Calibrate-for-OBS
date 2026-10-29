@@ -29,5 +29,6 @@
   "SuccessTitle": "Recalibrage terminé",
   "SuccessDetail": "Le recalibrage de RhyLive est terminé.",
   "UnconfirmedTitle": "Recalibrage non confirmé",
-  "UnconfirmedDetail": "Warudo n’a pas confirmé l’exécution du recalibrage."
+  "UnconfirmedDetail": "Warudo n’a pas confirmé l’exécution du recalibrage.",
+  "MissingTriggerDetail": "Le bouton de recalibrage RhyLive est introuvable dans cette version de Warudo. Vérifiez les mises à jour du plugin."
 }

@@ -29,5 +29,6 @@
   "SuccessTitle": "再調整完了",
   "SuccessDetail": "RhyLiveの再調整が完了しました。",
   "UnconfirmedTitle": "再調整を確認できません",
-  "UnconfirmedDetail": "Warudoから再調整の実行確認を受信できませんでした。"
+  "UnconfirmedDetail": "Warudoから再調整の実行確認を受信できませんでした。",
+  "MissingTriggerDetail": "このWarudoバージョンではRhyLiveの調整ボタンが見つかりません。プラグインの更新を確認してください。"
 }

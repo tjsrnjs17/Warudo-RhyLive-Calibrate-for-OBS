@@ -84,7 +84,7 @@ Copy `locale/en-US.json` to a new OBS locale filename and translate every value 
 
 ## Local connection details
 
-The plugin only connects to `localhost:19052` and `localhost:19053`. It reads the current session token from `%LOCALAPPDATA%\..\LocalLow\HakuyaLabs\Warudo\Player.log`, fetches the current scene, and invokes the selected RhyLive Receiver's `Calibrate` trigger. It does not upload logs, store the token, save the Warudo scene, or change tracking settings.
+The plugin only connects to `localhost:19052` and `localhost:19053`. It reads the current session token from `%LOCALAPPDATA%\..\LocalLow\HakuyaLabs\Warudo\Player.log`, fetches the current scene, checks the receiver's advertised trigger metadata, and invokes the RhyLive Receiver's `TriggerCalibrate` editor trigger. It does not upload logs, store the token, save the Warudo scene, or change tracking settings.
 
 No OBS SDK or Warudo assemblies are distributed in this repository. Runtime Qt libraries come from the user's OBS installation.
 

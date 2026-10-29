@@ -75,6 +75,7 @@ Text expectedTitle(const QString &scenario)
     if (scenario == "malformed") return Text::SceneTitle;
     if (scenario == "handshake") return Text::AuthTitle;
     if (scenario == "trigger-error") return Text::FailedTitle;
+    if (scenario == "missing-trigger" || scenario == "legacy-trigger") return Text::FailedTitle;
     if (scenario == "unconfirmed") return Text::UnconfirmedTitle;
     if (scenario == "timeout") return Text::TimeoutTitle;
     if (scenario == "offline") return Text::OfflineTitle;

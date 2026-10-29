@@ -29,5 +29,6 @@
   "SuccessTitle": "校准完成",
   "SuccessDetail": "RhyLive 重新校准已完成。",
   "UnconfirmedTitle": "未能确认校准",
-  "UnconfirmedDetail": "未收到 Warudo 确认校准已执行的响应。"
+  "UnconfirmedDetail": "未收到 Warudo 确认校准已执行的响应。",
+  "MissingTriggerDetail": "在此 Warudo 版本中未找到 RhyLive 校准按钮。请检查插件更新。"
 }

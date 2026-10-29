@@ -29,5 +29,6 @@
   "SuccessTitle": "캘리 완료",
   "SuccessDetail": "RhyLive 재보정이 완료되었습니다.",
   "UnconfirmedTitle": "캘리 확인 실패",
-  "UnconfirmedDetail": "와루도의 실행 확인 응답을 받지 못했습니다."
+  "UnconfirmedDetail": "와루도의 실행 확인 응답을 받지 못했습니다.",
+  "MissingTriggerDetail": "이 버전의 와루도에서 RhyLive 보정 버튼을 찾지 못했습니다. 플러그인 업데이트를 확인해 주세요."
 }

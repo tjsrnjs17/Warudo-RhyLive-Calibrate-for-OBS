@@ -68,7 +68,13 @@ def run_case(executable, scenario, locale, expected_success):
             self.send_response(401 if scenario == "auth" else 200)
             self.send_header("Content-Type", "application/json")
             self.end_headers()
-            receiver = {"id": ASSET_ID, "typeId": TYPE_ID, "active": True, "name": "RhyLive Receiver"}
+            receiver = {"id": ASSET_ID, "typeId": TYPE_ID, "active": True, "name": "RhyLive Receiver",
+                        "triggers": {"TriggerCalibrate": {"properties": {"label": "CALIBRATE"}},
+                                     "ConfigureBlendShapeMapping": {"properties": {"label": "CONFIGURE_BLENDSHAPES_MAPPING"}}}}
+            if scenario == "missing-trigger":
+                receiver.pop("triggers")
+            if scenario == "legacy-trigger":
+                receiver["triggers"] = {"Calibrate": {"properties": {"label": "CALIBRATE"}}}
             assets = [] if scenario == "missing" else [receiver]
             if scenario == "multiple":
                 assets.append({**receiver, "id": "66666666-7777-8888-9999-000000000000"})
@@ -105,7 +111,7 @@ def run_case(executable, scenario, locale, expected_success):
                 opcode, payload = client_frame(self.request)
                 command = json.loads(payload)
                 if opcode != 1 or command != {"action": "invokeEntityTriggerPort",
-                                               "data": {"id": ASSET_ID, "port": "Calibrate"}}:
+                                               "data": {"id": ASSET_ID, "port": "TriggerCalibrate"}}:
                     raise ValueError("Incorrect calibration command")
                 state["triggers"] += 1
                 if scenario == "timeout":
@@ -184,6 +190,8 @@ if __name__ == "__main__":
         ("auth", "fr-FR", False),
         ("missing", "zh-CN", False),
         ("multiple", "de-DE", False),
+        ("missing-trigger", "ko-KR", False),
+        ("legacy-trigger", "en-US", False),
         ("malformed", "es-ES", False),
         ("handshake", "pt-BR", False),
         ("trigger-error", "ko-KR", False),

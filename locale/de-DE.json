@@ -29,5 +29,6 @@
   "SuccessTitle": "Kalibriert",
   "SuccessDetail": "RhyLive wurde neu kalibriert.",
   "UnconfirmedTitle": "Kalibrierung nicht bestätigt",
-  "UnconfirmedDetail": "Warudo hat die Ausführung der Kalibrierung nicht bestätigt."
+  "UnconfirmedDetail": "Warudo hat die Ausführung der Kalibrierung nicht bestätigt.",
+  "MissingTriggerDetail": "Die RhyLive-Kalibrierung ist in dieser Warudo-Version nicht verfügbar. Prüfen Sie, ob ein Plugin-Update verfügbar ist."
 }

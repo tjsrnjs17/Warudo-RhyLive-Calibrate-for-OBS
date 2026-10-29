@@ -1,5 +1,11 @@
 # Changelog
 
+## 0.2.1
+
+- Fixed the calibration request to invoke the editor's `TriggerCalibrate` port instead of the internal `Calibrate` method name.
+- Check the receiver's advertised trigger metadata before sending a calibration request.
+- Added regression scenarios for missing trigger metadata and an unsupported legacy trigger name.
+
 ## 0.2.0
 
 - Added automatic OBS language selection and nine embedded translations.

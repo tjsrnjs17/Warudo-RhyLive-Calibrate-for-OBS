@@ -29,5 +29,6 @@
   "SuccessTitle": "校正完成",
   "SuccessDetail": "RhyLive 重新校正已完成。",
   "UnconfirmedTitle": "無法確認校正",
-  "UnconfirmedDetail": "未收到 Warudo 確認校正已執行的回應。"
+  "UnconfirmedDetail": "未收到 Warudo 確認校正已執行的回應。",
+  "MissingTriggerDetail": "在此 Warudo 版本中找不到 RhyLive 校正按鈕。請檢查外掛程式更新。"
 }

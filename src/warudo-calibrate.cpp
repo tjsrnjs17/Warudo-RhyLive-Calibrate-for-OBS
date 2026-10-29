@@ -220,7 +220,15 @@ private:
                    ui(Text::MultipleDetail));
             return;
         }
-        assetId = receivers.first().value("id").toString();
+        const auto receiver = receivers.first();
+        const auto triggers = receiver.value("triggers").toObject();
+        const auto calibration = triggers.constFind("TriggerCalibrate");
+        if (calibration == triggers.constEnd() || !calibration.value().isObject()) {
+            finish(false, ui(Text::FailedTitle), ui(Text::MissingTriggerDetail));
+            return;
+        }
+        assetId = receiver.value("id").toString();
+        calibrationTrigger = calibration.key();
         reply->deleteLater();
         reply = nullptr;
         openWebSocket();
@@ -284,7 +292,7 @@ private:
             input.remove(0, end + 4);
             handshaken = true;
             const QJsonObject command{{"action", "invokeEntityTriggerPort"},
-                {"data", QJsonObject{{"id", assetId}, {"port", "Calibrate"}}}};
+                {"data", QJsonObject{{"id", assetId}, {"port", calibrationTrigger}}}};
             socket->write(maskedFrame(QJsonDocument(command).toJson(QJsonDocument::Compact)));
         }
         while (busy && socket && input.size() >= 2) {
@@ -383,6 +391,7 @@ private:
     QTimer resetLabel;
     QString token;
     QString assetId;
+    QString calibrationTrigger;
     QString detail;
     QByteArray input;
     QByteArray fragment;
